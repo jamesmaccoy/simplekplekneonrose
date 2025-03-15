@@ -1,5 +1,6 @@
 // storage-adapter-import-placeholder
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
+import { s3Storage } from '@payloadcms/storage-s3'
 
 import sharp from 'sharp' // sharp-import
 import path from 'path'
@@ -69,8 +70,23 @@ export default buildConfig({
   globals: [Header, Footer],
   plugins: [
     ...plugins,
+    s3Storage({
+      bucket: process.env.R2_BUCKET || 'default-bucket',
+      collections: {
+        media: true,
+      },
+      config: {
+        credentials: {
+          accessKeyId: process.env.R2_ACCESS_KEY_ID || 'default-access-key',
+          secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || 'default-secret-key',
+        },
+        endpoint: process.env.R2_ENDPOINT || 'default-endpoint',
+        region: process.env.R2_REGION || 'default-region',
+      },
+    }),
     // storage-adapter-placeholder
   ],
+  // ... your other Payload config ...
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {
