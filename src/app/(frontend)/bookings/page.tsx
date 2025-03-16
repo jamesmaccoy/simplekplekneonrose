@@ -23,7 +23,7 @@ export default async function Bookings() {
     ...(booking.post as Pick<Post, 'meta' | 'slug' | 'title'>),
     fromDate: booking.fromDate,
     toDate: booking.toDate,
-    guests: booking.guests,
+    guests: booking.guests?.map(guest => typeof guest === 'number' ? guest.toString() : guest) || null,
     id: booking.id,
   }))
 

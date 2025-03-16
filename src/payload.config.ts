@@ -73,17 +73,17 @@ export default buildConfig({
   plugins: [
     ...plugins,
     s3Storage({
-      bucket: process.env.R2_BUCKET ?? 'default-bucket',
+      bucket: process.env.R2_BUCKET || 'default-bucket',
       collections: {
         media: true,
       },
       config: {
         credentials: {
-          accessKeyId: process.env.R2_ACCESS_KEY_ID ?? 'default-access-key',
-          secretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? 'default-secret-key',
+          accessKeyId: process.env.R2_ACCESS_KEY_ID || 'default-access-key',
+          secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || 'default-secret-key',
         },
-        endpoint: process.env.R2_ENDPOINT ?? 'default-endpoint',
-        region: process.env.R2_REGION ?? 'default-region',
+        endpoint: process.env.R2_ENDPOINT,
+        region: process.env.R2_REGION,
       },
     }),
     // storage-adapter-placeholder
